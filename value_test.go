@@ -27,6 +27,20 @@ func TestGetAndSet(t *testing.T) {
 	assert.True(t, ok2)
 }
 
+func TestGetOrElse(t *testing.T) {
+	key := Key()
+	ctx := context.Background()
+
+	defaultVal := &S{X: 1}
+	v := GetOrElse(ctx, key, defaultVal)
+	assert.Equal(t, &S{X: 1}, v, "returns default value")
+
+	ctx = Set(ctx, key, &S{X: 100})
+
+	v2 := GetOrElse(ctx, key, defaultVal)
+	assert.Equal(t, &S{X: 100}, v2, "returns value associated with key")
+}
+
 func ExampleGet() {
 	key := Key()
 	ctx := Set(context.Background(), key, &S{X: 100})
