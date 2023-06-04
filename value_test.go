@@ -52,3 +52,13 @@ func ExampleGet() {
 	// &ctxvalue.S{X:100}
 	// true
 }
+
+func ExampleGetOrElse() {
+	key := Key()
+	ctx := context.Background()
+	v := GetOrElse(ctx, key, &S{X: 100})
+	fmt.Printf("%#v\n", v)
+
+	// Output:
+	// &ctxvalue.S{X:100}
+}
